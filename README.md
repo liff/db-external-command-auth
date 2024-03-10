@@ -18,6 +18,33 @@
 
 <!-- Plugin description -->
 Use an external command to acquire database connection credentials.
+
+Executes an external command and extracts database and username from its output.
+
+The plugin will first attempt to extract the information from output from a vault-like JSON with the following format:
+
+```json
+{
+  "data": {
+    "username": "username",
+    "password": "password"
+  }
+}  
+```
+
+If JSON parsing fails, it attempts to extract the password and username separated by a newline:
+
+```
+password
+username
+```
+
+The prefix `username:` is removed from the username, so the following also works:
+
+```
+password
+Username: username
+```
 <!-- Plugin description end -->
 
 ## Installation
