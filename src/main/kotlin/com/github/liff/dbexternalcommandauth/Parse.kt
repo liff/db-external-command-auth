@@ -10,9 +10,11 @@ private data class VaultLike(val data: Data) {
     data class Data(val username: String, val password: String)
 }
 
+private val json = Json { ignoreUnknownKeys = true }
+
 fun parse(output: String): Credentials? {
     val vaultLike =
-        runOrNull { Json.decodeFromString<VaultLike>(output) }
+        runOrNull { json.decodeFromString<VaultLike>(output) }
             ?.let { Credentials(it.data.username, it.data.password) }
 
     fun passLike() =

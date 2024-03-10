@@ -41,4 +41,25 @@ class ParseTest : StringSpec({
 
         creds should beEqual(Credentials("User", "PaSS"))
     }
+
+    "vault-like with extra fields" {
+        val creds =
+            parse(
+                //language=JSON
+                """
+                {
+                  "data": {
+                    "username": "User",
+                    "password": "PaSS",
+                    "sanity-level": 5
+                  },
+                  "list": [],
+                  "obj": {"a":  1},
+                  "str": "string"
+                }
+                """.trimIndent(),
+            )
+
+        creds should beEqual(Credentials("User", "PaSS"))
+    }
 })

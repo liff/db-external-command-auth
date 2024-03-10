@@ -32,7 +32,9 @@ The plugin will first attempt to extract the information from output from a vaul
 }  
 ```
 
-If JSON parsing fails, it attempts to extract the password and username separated by a newline:
+Any extra fields are ignored.
+
+If JSON parsing fails, the output is expected to be password and username separated by a newline:
 
 ```
 password
