@@ -1,9 +1,22 @@
+import org.gradle.api.internal.provider.Providers
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
+import java.io.ByteArrayOutputStream
 
 fun properties(key: String) = providers.gradleProperty(key)
 
 fun environment(key: String) = providers.environmentVariable(key)
+
+fun secretToolLookup(vararg attrs: Pair<String, String>): Provider<String> =
+    Providers.changing {
+        ByteArrayOutputStream().also { out ->
+            exec {
+                executable = "secret-tool"
+                args = listOf("lookup", *attrs.flatMap { (k, v) -> listOf(k, v) }.toTypedArray())
+                standardOutput = out
+            }.assertNormalExitValue().rethrowFailure()
+        }.toString()
+    }
 
 plugins {
     id("java") // Java support
@@ -124,14 +137,13 @@ tasks {
     }
 
     signPlugin {
-        certificateChain = environment("CERTIFICATE_CHAIN")
-        privateKey = environment("PRIVATE_KEY")
-        password = environment("PRIVATE_KEY_PASSWORD")
+        privateKeyFile = file("secret/private.pem")
+        certificateChainFile = file("secret/chain.crt")
     }
 
     publishPlugin {
         dependsOn("patchChangelog")
-        token = environment("PUBLISH_TOKEN")
+        token = secretToolLookup("jetbrains" to "marketplace")
         // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels,
         // like 2.1.7-alpha.3.
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically.
