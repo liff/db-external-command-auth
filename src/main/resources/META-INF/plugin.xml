@@ -1,18 +1,15 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.liff.dbexternalcommandauth</id>
-    <name>db-external-command-auth Template</name>
-    <vendor>liff</vendor>
+    <name>External Command Database Authentication</name>
+    <vendor>Olli Helenius</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.database</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.liff.dbexternalcommandauth.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+    <extensions defaultExtensionNs="com.intellij.database">
+        <connectionInterceptor implementation="com.github.liff.dbexternalcommandauth.CommandAuthProvider"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.liff.dbexternalcommandauth.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
 </idea-plugin>
