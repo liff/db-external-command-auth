@@ -7,27 +7,37 @@ import io.kotest.matchers.should
 
 class ParseTest : StringSpec({
     "pass-like (1)" {
-        val creds = parse("""
-            PaSS
-            User
-        """.trimIndent())
+        val creds =
+            parse(
+                """
+                PaSS
+                User
+                """.trimIndent(),
+            )
 
         creds should beEqual(Credentials("User", "PaSS"))
     }
 
     "pass-like (2)" {
-        val creds = parse("""
-            PaSS
-            Username: User
-        """.trimIndent())
+        val creds =
+            parse(
+                """
+                PaSS
+                Username: User
+                """.trimIndent(),
+            )
 
         creds should beEqual(Credentials("User", "PaSS"))
     }
 
     "vault-like" {
-        val creds = parse("""
-            { "data": { "username": "User", "password": "PaSS" } }
-        """.trimIndent())
+        val creds =
+            parse(
+                //language=JSON
+                """
+                { "data": { "username": "User", "password": "PaSS" } }
+                """.trimIndent(),
+            )
 
         creds should beEqual(Credentials("User", "PaSS"))
     }

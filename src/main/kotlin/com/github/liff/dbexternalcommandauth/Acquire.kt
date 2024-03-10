@@ -4,7 +4,10 @@ import com.intellij.credentialStore.Credentials
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-suspend fun acquire(command: String, parse: (String) -> Credentials? = ::parse): Result<Credentials?> =
+suspend fun acquire(
+    command: String,
+    parse: (String) -> Credentials? = ::parse,
+): Result<Credentials?> =
     withContext(Dispatchers.IO) {
         val proc = wrap(command).start()
 
@@ -23,8 +26,9 @@ private const val MAX_OUTPUT_SIZE = 32 * 1024
 
 private fun wrap(command: String): ProcessBuilder {
     val osName = System.getProperty("os.name")
-    return if (osName.startsWith("Windows"))
+    return if (osName.startsWith("Windows")) {
         ProcessBuilder("cmd.exe", "/c", command)
-    else
+    } else {
         ProcessBuilder("sh", "-c", command)
+    }
 }

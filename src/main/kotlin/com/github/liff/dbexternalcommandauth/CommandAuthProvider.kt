@@ -10,11 +10,14 @@ import com.intellij.database.dataSource.ui.AuthWidgetBuilder
 import com.intellij.database.view.DatabaseCoreUiService
 import com.intellij.openapi.project.Project
 
-
 class CommandAuthProvider : DatabaseAuthProvider {
-    override suspend fun interceptConnection(connection: ProtoConnection, silent: Boolean): Boolean {
-        val command = connection.connectionPoint.getAdditionalProperty("command")
-            ?: error(MyBundle.message("no-command"))
+    override suspend fun interceptConnection(
+        connection: ProtoConnection,
+        silent: Boolean,
+    ): Boolean {
+        val command =
+            connection.connectionPoint.getAdditionalProperty("command")
+                ?: error(MyBundle.message("no-command"))
 
         val credentials = acquire(command).getOrThrow()
 
@@ -25,23 +28,21 @@ class CommandAuthProvider : DatabaseAuthProvider {
 
     override fun getApplicability(
         point: DatabaseConnectionPoint,
-        level: DatabaseAuthProvider.ApplicabilityLevel
-    ): DatabaseAuthProvider.ApplicabilityLevel.Result =
-        DatabaseAuthProvider.ApplicabilityLevel.Result.APPLICABLE
+        level: DatabaseAuthProvider.ApplicabilityLevel,
+    ): DatabaseAuthProvider.ApplicabilityLevel.Result = DatabaseAuthProvider.ApplicabilityLevel.Result.APPLICABLE
 
     override fun createWidget(
         project: Project?,
         credentials: DatabaseCredentials,
-        config: DatabaseConnectionConfig
+        config: DatabaseConnectionConfig,
     ): DatabaseAuthProvider.AuthWidget? =
         DatabaseCoreUiService.getInstance().createAuthWidgetBuilder()?.apply {
             addTextField(
                 MyBundle.messagePointer("command"),
                 AuthWidgetBuilder.additionalPropertySerializer("command"),
-                AuthWidgetBuilder.removeParameterHandler("command")
+                AuthWidgetBuilder.removeParameterHandler("command"),
             )
         }?.build(project, credentials, config)
-
 
     override fun getId(): String = "external-command"
 
