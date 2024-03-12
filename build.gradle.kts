@@ -7,17 +7,6 @@ fun properties(key: String) = providers.gradleProperty(key)
 
 fun environment(key: String) = providers.environmentVariable(key)
 
-fun secretToolLookup(vararg attrs: Pair<String, String>): Provider<String> =
-    Providers.changing {
-        ByteArrayOutputStream().also { out ->
-            exec {
-                executable = "secret-tool"
-                args = listOf("lookup", *attrs.flatMap { (k, v) -> listOf(k, v) }.toTypedArray())
-                standardOutput = out
-            }.assertNormalExitValue().rethrowFailure()
-        }.toString()
-    }
-
 plugins {
     id("java") // Java support
     alias(libs.plugins.kotlin) // Kotlin support
@@ -137,13 +126,13 @@ tasks {
     }
 
     signPlugin {
-        privateKeyFile = file("secret/private.pem")
-        certificateChainFile = file("secret/chain.crt")
+        certificateChain = environment("CERTIFICATE_CHAIN")
+        privateKey = environment("PRIVATE_KEY")
     }
 
     publishPlugin {
         dependsOn("patchChangelog")
-        token = secretToolLookup("jetbrains" to "marketplace")
+        token = environment("PUBLISH_TOKEN")
         // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels,
         // like 2.1.7-alpha.3.
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically.
