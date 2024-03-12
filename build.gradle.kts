@@ -1,7 +1,5 @@
-import org.gradle.api.internal.provider.Providers
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
-import java.io.ByteArrayOutputStream
 
 fun properties(key: String) = providers.gradleProperty(key)
 
