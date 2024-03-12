@@ -3,5 +3,10 @@
 # db-external-command-auth Changelog
 
 ## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+
+## [0.0.2] - 2024-03-12
+
+Publishing a release from GitHub. No changes to functionality.
+
+[Unreleased]: https://github.com/liff/db-external-command-auth/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/liff/db-external-command-auth/commits/v0.0.2
