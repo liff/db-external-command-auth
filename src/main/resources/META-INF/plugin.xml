@@ -2,7 +2,7 @@
 <idea-plugin>
     <id>com.github.liff.dbexternalcommandauth</id>
     <name>External Command Database Authentication</name>
-    <vendor>Olli Helenius</vendor>
+    <vendor url="https://github.com/liff">Olli Helenius</vendor>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.database</depends>
