@@ -73,7 +73,7 @@ jobs:
 
       # Build plugin
       - name: Build plugin
-        run: ./gradlew buildPlugin
+        run: ./gradlew --scan buildPlugin
 
       # Prepare plugin archive content for creating artifact
       - name: Prepare Plugin Artifact
@@ -119,7 +119,7 @@ jobs:
 
       # Run tests
       - name: Run Tests
-        run: ./gradlew check
+        run: ./gradlew --scan check
 
       # Collect Tests Result of failed tests
       - name: Collect Tests Result
@@ -210,7 +210,7 @@ jobs:
 
       # Run Verify Plugin task and IntelliJ Plugin Verifier tool
       - name: Run Plugin Verification tasks
-        run: ./gradlew runPluginVerifier -Dplugin.verifier.home.dir=${{ needs.build.outputs.pluginVerifierHomeDir }}
+        run: ./gradlew --scan runPluginVerifier -Dplugin.verifier.home.dir=${{ needs.build.outputs.pluginVerifierHomeDir }}
 
       # Collect Plugin Verifier Result
       - name: Collect Plugin Verifier Result
