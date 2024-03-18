@@ -12,16 +12,20 @@ import com.intellij.openapi.project.Project
 
 class CommandAuthProvider : DatabaseAuthProvider {
     override suspend fun interceptConnection(
-        connection: ProtoConnection,
+        proto: ProtoConnection,
         silent: Boolean,
     ): Boolean {
         val command =
-            connection.connectionPoint.getAdditionalProperty("command")
+            proto.connectionPoint.getAdditionalProperty("command")
                 ?: error(MyBundle.message("no-command"))
 
         val credentials = acquire(command).getOrThrow()
 
-        applyCredentials(connection, credentials, true)
+        applyCredentials(
+            proto = proto,
+            credentials = credentials,
+            cancelOnEmpty = true,
+        )
 
         return true
     }
