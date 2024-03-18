@@ -40,13 +40,17 @@ class CommandAuthProvider : DatabaseAuthProvider {
         credentials: DatabaseCredentials,
         config: DatabaseConnectionConfig,
     ): DatabaseAuthProvider.AuthWidget? =
-        DatabaseCoreUiService.getInstance().createAuthWidgetBuilder()?.apply {
-            addTextField(
-                MyBundle.messagePointer("command"),
-                AuthWidgetBuilder.additionalPropertySerializer("command"),
-                AuthWidgetBuilder.removeParameterHandler("command"),
-            )
-        }?.build(project, credentials, config)
+        DatabaseCoreUiService
+            .getInstance()
+            .createAuthWidgetBuilder()
+            ?.apply {
+                addTextField(
+                    MyBundle.messagePointer("command"),
+                    AuthWidgetBuilder.additionalPropertySerializer("command"),
+                    AuthWidgetBuilder.removeParameterHandler("command"),
+                )
+            }
+            ?.build(project, credentials, config)
 
     override fun getId(): String = "external-command"
 
