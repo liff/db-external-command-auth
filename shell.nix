@@ -7,8 +7,8 @@ in
 devshell.mkShell ({pkgs, ...}: {
   packages = with pkgs; [
     git
-    openjdk17
-    (gradle.override { java = openjdk17; })
+    jetbrains.jdk
+    (gradle.override { java = jetbrains.jdk; })
     act
   ];
 })
