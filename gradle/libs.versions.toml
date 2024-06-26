@@ -6,7 +6,7 @@ ktlint = "1.2.1"
 
 # plugins
 kotlin = "2.0.0"
-kotlinx-serialization = "1.7.0"
+kotlinx-serialization = "1.7.1"
 changelog = "2.2.0"
 gradle-intellij-plugin = "1.17.4"
 qodana = "2024.1.5"
