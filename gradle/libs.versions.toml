@@ -1,6 +1,6 @@
 [versions]
 # libraries
-junit-jupiter = "5.10.2"
+junit-jupiter = "5.10.3"
 kotest = "5.9.1"
 ktlint = "1.2.1"
 
