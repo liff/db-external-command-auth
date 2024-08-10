@@ -1,6 +1,7 @@
 package com.github.liff.dbexternalcommandauth
 
 import com.intellij.credentialStore.Credentials
+import com.intellij.util.io.awaitExit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -15,7 +16,7 @@ suspend fun acquire(
 
         val output = proc.inputStream.readNBytes(MAX_OUTPUT_SIZE).decodeToString()
         val errors = proc.errorStream.readNBytes(MAX_OUTPUT_SIZE).decodeToString()
-        if (proc.waitFor() == 0) {
+        if (proc.awaitExit() == 0) {
             Result.success(parse(output))
         } else {
             Result.failure(RuntimeException(errors))
