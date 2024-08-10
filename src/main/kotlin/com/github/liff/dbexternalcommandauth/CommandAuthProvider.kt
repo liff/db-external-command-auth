@@ -9,6 +9,7 @@ import com.intellij.database.dataSource.DatabaseCredentialsAuthProvider.Companio
 import com.intellij.database.dataSource.ui.AuthWidgetBuilder
 import com.intellij.database.view.DatabaseCoreUiService
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.project.guessProjectDir
 
 class CommandAuthProvider : DatabaseAuthProvider {
     override suspend fun interceptConnection(
@@ -19,7 +20,15 @@ class CommandAuthProvider : DatabaseAuthProvider {
             proto.connectionPoint.getAdditionalProperty("command")
                 ?: error(MyBundle.message("no-command"))
 
-        val credentials = acquire(command)
+        val directory = proto.project.guessProjectDir()?.let {
+            try {
+                it.toNioPath().toFile()
+            } catch (_: UnsupportedOperationException) {
+                null
+            }
+        }
+
+        val credentials = acquire(command = command, directory = directory)
 
         applyCredentials(
             proto = proto,

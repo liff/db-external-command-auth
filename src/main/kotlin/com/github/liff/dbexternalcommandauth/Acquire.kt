@@ -4,13 +4,20 @@ import com.intellij.credentialStore.Credentials
 import com.intellij.util.io.awaitExit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.File
 
 suspend fun acquire(
     command: String,
+    directory: File?,
     parse: (String) -> Credentials? = ::parse,
 ): Credentials? =
     withContext(Dispatchers.IO) {
-        val proc = wrap(command).start()
+        val proc = wrap(command)
+            .apply {
+                if (directory != null)
+                    directory(directory)
+            }
+            .start()
 
         proc.outputStream.close()
 

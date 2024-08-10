@@ -7,7 +7,8 @@
 <!-- Plugin description -->
 Use an external command to acquire database connection credentials.
 
-Executes an external command and extracts database and username from its output.
+Executes an external command and extracts database and username from its output. The command is executed in the
+project’s root directory, if that can be resolved.
 
 The plugin will first attempt to extract the information from output from a [Vault](https://www.vaultproject.io/)-like JSON with the following format:
 

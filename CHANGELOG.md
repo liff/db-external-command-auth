@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Attempt to use the project directory as the working directory when running the command.
+
 ## [0.1.0] - 2024-03-18
 
 - Extend compatibility to 2024.1
