@@ -49,8 +49,7 @@ class CommandAuthProvider : DatabaseAuthProvider {
                     AuthWidgetBuilder.additionalPropertySerializer("command"),
                     AuthWidgetBuilder.removeParameterHandler("command"),
                 )
-            }
-            ?.build(project, credentials, config)
+            }?.build(project, credentials, config)
 
     override fun getId(): String = "external-command"
 

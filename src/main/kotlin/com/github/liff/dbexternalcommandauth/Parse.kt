@@ -5,9 +5,14 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 @Serializable
-private data class VaultLike(val data: Data) {
+private data class VaultLike(
+    val data: Data,
+) {
     @Serializable
-    data class Data(val username: String, val password: String)
+    data class Data(
+        val username: String,
+        val password: String,
+    )
 }
 
 private val json = Json { ignoreUnknownKeys = true }
