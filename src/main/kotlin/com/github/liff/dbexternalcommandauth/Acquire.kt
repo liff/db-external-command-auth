@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 suspend fun acquire(
     command: String,
     parse: (String) -> Credentials? = ::parse,
-): Result<Credentials?> =
+): Credentials? =
     withContext(Dispatchers.IO) {
         val proc = wrap(command).start()
 
@@ -17,9 +17,9 @@ suspend fun acquire(
         val output = proc.inputStream.readNBytes(MAX_OUTPUT_SIZE).decodeToString()
         val errors = proc.errorStream.readNBytes(MAX_OUTPUT_SIZE).decodeToString()
         if (proc.awaitExit() == 0) {
-            Result.success(parse(output))
+            parse(output)
         } else {
-            Result.failure(RuntimeException(errors))
+            throw RuntimeException(errors)
         }
     }
 

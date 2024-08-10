@@ -19,7 +19,7 @@ class CommandAuthProvider : DatabaseAuthProvider {
             proto.connectionPoint.getAdditionalProperty("command")
                 ?: error(MyBundle.message("no-command"))
 
-        val credentials = acquire(command).getOrThrow()
+        val credentials = acquire(command)
 
         applyCredentials(
             proto = proto,
