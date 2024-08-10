@@ -20,13 +20,14 @@ class CommandAuthProvider : DatabaseAuthProvider {
             proto.connectionPoint.getAdditionalProperty("command")
                 ?: error(MyBundle.message("no-command"))
 
-        val directory = proto.project.guessProjectDir()?.let {
-            try {
-                it.toNioPath().toFile()
-            } catch (_: UnsupportedOperationException) {
-                null
+        val directory =
+            proto.project.guessProjectDir()?.let {
+                try {
+                    it.toNioPath().toFile()
+                } catch (_: UnsupportedOperationException) {
+                    null
+                }
             }
-        }
 
         val credentials = acquire(command = command, directory = directory)
 

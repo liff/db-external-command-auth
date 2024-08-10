@@ -12,12 +12,13 @@ suspend fun acquire(
     parse: (String) -> Credentials? = ::parse,
 ): Credentials? =
     withContext(Dispatchers.IO) {
-        val proc = wrap(command)
-            .apply {
-                if (directory != null)
-                    directory(directory)
-            }
-            .start()
+        val proc =
+            wrap(command)
+                .apply {
+                    if (directory != null) {
+                        directory(directory)
+                    }
+                }.start()
 
         proc.outputStream.close()
 
