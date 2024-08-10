@@ -3,7 +3,7 @@
     <style>
         path, line, circle {
           fill: none;
-          stroke: white;
+          stroke: #ddd;
         }
     </style>
 
