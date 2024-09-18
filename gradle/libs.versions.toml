@@ -9,7 +9,7 @@ kotlin = "2.0.20"
 kotlinx-serialization = "1.7.2"
 changelog = "2.2.1"
 gradle-intellij-plugin = "1.17.4"
-qodana = "2024.1.9"
+qodana = "2024.2.2"
 kover = "0.8.3"
 
 [libraries]
