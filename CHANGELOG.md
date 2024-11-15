@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2024-11-08
+
 - Add compatibility for 2024.3.
 
 ## [0.2.0] - 2024-08-10
@@ -20,7 +22,8 @@
 
 Publishing a release from GitHub. No changes to functionality.
 
-[Unreleased]: https://github.com/liff/db-external-command-auth/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/liff/db-external-command-auth/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/liff/db-external-command-auth/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/liff/db-external-command-auth/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/liff/db-external-command-auth/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/liff/db-external-command-auth/commits/v0.0.2
