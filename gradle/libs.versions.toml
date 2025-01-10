@@ -10,7 +10,7 @@ kotlinx-serialization = "1.8.0"
 changelog = "2.2.1"
 gradle-intellij-plugin = "1.17.4"
 qodana = "2024.3.4"
-kover = "0.9.0"
+kover = "0.9.1"
 
 [libraries]
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
