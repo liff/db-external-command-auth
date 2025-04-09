@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Add compatibility for 2025.1.
+
 ## [1.0.0] - 2024-11-08
 
 - Add compatibility for 2024.3.
