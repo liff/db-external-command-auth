@@ -7,7 +7,6 @@ import com.intellij.database.dataSource.DatabaseConnectionInterceptor.ProtoConne
 import com.intellij.database.dataSource.DatabaseConnectionPoint
 import com.intellij.database.dataSource.DatabaseCredentialsAuthProvider.Companion.applyCredentials
 import com.intellij.database.dataSource.ui.AuthWidgetBuilder
-import com.intellij.database.view.DatabaseCoreUiService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 
@@ -45,21 +44,17 @@ class CommandAuthProvider : DatabaseAuthProvider {
         level: DatabaseAuthProvider.ApplicabilityLevel,
     ): DatabaseAuthProvider.ApplicabilityLevel.Result = DatabaseAuthProvider.ApplicabilityLevel.Result.APPLICABLE
 
-    override fun createWidget(
+    override fun AuthWidgetBuilder.configureWidget(
         project: Project?,
         credentials: DatabaseCredentials,
         config: DatabaseConnectionConfig,
-    ): DatabaseAuthProvider.AuthWidget? =
-        DatabaseCoreUiService
-            .getInstance()
-            .createAuthWidgetBuilder()
-            ?.apply {
-                addTextField(
-                    MyBundle.messagePointer("command"),
-                    AuthWidgetBuilder.additionalPropertySerializer("command"),
-                    AuthWidgetBuilder.removeParameterHandler("command"),
-                )
-            }?.build(project, credentials, config)
+    ) {
+        addTextField(
+            MyBundle.messagePointer("command"),
+            AuthWidgetBuilder.additionalPropertySerializer("command"),
+            AuthWidgetBuilder.removeParameterHandler("command"),
+        )
+    }
 
     override fun getId(): String = "external-command"
 
