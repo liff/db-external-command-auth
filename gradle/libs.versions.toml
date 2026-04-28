@@ -9,7 +9,7 @@ kotlin = "2.3.21"
 kotlinx-serialization = "1.11.0"
 changelog = "2.5.0"
 intelliJPlatform = "2.15.0"
-qodana = "2025.3.2"
+qodana = "2026.1.0"
 kover = "0.9.8"
 
 [libraries]
