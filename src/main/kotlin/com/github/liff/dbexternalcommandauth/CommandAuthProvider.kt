@@ -1,13 +1,12 @@
 package com.github.liff.dbexternalcommandauth
 
-import com.intellij.database.access.DatabaseCredentials
 import com.intellij.database.dataSource.DatabaseAuthProvider
+import com.intellij.database.dataSource.DatabaseAuthProviderParam
+import com.intellij.database.dataSource.DatabaseAuthParameterBuilderHelper
 import com.intellij.database.dataSource.DatabaseConnectionConfig
 import com.intellij.database.dataSource.DatabaseConnectionInterceptor.ProtoConnection
 import com.intellij.database.dataSource.DatabaseConnectionPoint
 import com.intellij.database.dataSource.DatabaseCredentialsAuthProvider.Companion.applyCredentials
-import com.intellij.database.dataSource.ui.AuthWidgetBuilder
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 
 class CommandAuthProvider : DatabaseAuthProvider {
@@ -44,17 +43,17 @@ class CommandAuthProvider : DatabaseAuthProvider {
         level: DatabaseAuthProvider.ApplicabilityLevel,
     ): DatabaseAuthProvider.ApplicabilityLevel.Result = DatabaseAuthProvider.ApplicabilityLevel.Result.APPLICABLE
 
-    override fun AuthWidgetBuilder.configureWidget(
-        project: Project?,
-        credentials: DatabaseCredentials,
+    override fun getAuthParams(
         config: DatabaseConnectionConfig,
-    ) {
-        addTextField(
-            MyBundle.messagePointer("command"),
-            AuthWidgetBuilder.additionalPropertySerializer("command"),
-            AuthWidgetBuilder.removeParameterHandler("command"),
-        )
-    }
+    ): List<DatabaseAuthProviderParam<*>> =
+        DatabaseAuthProviderParam.buildParams {
+            textParam(
+                id = "command",
+                label = MyBundle.message("command"),
+                serializer = DatabaseAuthParameterBuilderHelper.additionalPropertySerializer("command"),
+                urlHandler = DatabaseAuthParameterBuilderHelper.removeParameterHandler("command"),
+            )
+        }
 
     override fun getId(): String = "external-command"
 

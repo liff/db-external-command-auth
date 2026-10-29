@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-30
+
+- Show the command field on IDEA 2026.2 via `getAuthParams` (replaces removed `AuthWidgetBuilder` API).
+
 ## [1.1.0] - 2025-12-11
 
 - Add compatibility for 2025.3
@@ -34,7 +38,8 @@
 
 Publishing a release from GitHub. No changes to functionality.
 
-[Unreleased]: https://github.com/liff/db-external-command-auth/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/liff/db-external-command-auth/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/liff/db-external-command-auth/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/liff/db-external-command-auth/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/liff/db-external-command-auth/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/liff/db-external-command-auth/compare/v1.0.0...v1.0.1
